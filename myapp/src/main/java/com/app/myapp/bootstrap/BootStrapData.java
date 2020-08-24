@@ -36,26 +36,35 @@ public class BootStrapData implements CommandLineRunner {
 		publiser.setZip("5282332");
 
 		publishRep.save(publiser);
+		
         System.out.println("publer : "+publiser);
 		Author raju = new Author("raju", "m");
 		Book b1 = new Book("tile", "123456");
 
 		raju.getBook().add(b1);
 		b1.getAuthors().add(raju);
-
+        b1.setPubliser(publiser);
+         
 		authorRepository.save(raju);
 		bookRepsitory.save(b1);
-
+		publiser.getBooks().add(b1);
+		publishRep.save(publiser);
+		
 		Author naga = new Author("naga", "raju");
 		Book b2 = new Book("tile", "123456");
 
 		naga.getBook().add(b2);
 		b2.getAuthors().add(naga);
+		b2.setPubliser(publiser);
 
+		publiser.getBooks().add(b2);
 		authorRepository.save(naga);
 		bookRepsitory.save(b2);
+		
+		publishRep.save(publiser);
 
 		System.out.println("number of books" + bookRepsitory.count());
+		System.out.println("publish count of books"+publishRep.count());
 
 	}
 
